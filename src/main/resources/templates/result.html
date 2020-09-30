@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${name}+'结果展示'">结果展示</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="form-group">
+            <div class="col-md-12 column" th:if="${name} ne null">
+                <h3 th:text="${name}"></h3>
+                <p><a href="/index">返回主页</a></p>
+                <p><a th:href="'/upload/' + ${code}" th:text="'返回' + ${name}">返回上一页</a></p>
+                <image th:src="${filePath}" height="200px"></image>
+<!--                <p th:if="${result} ne null" th:text="${result.toString()}"></p>-->
+                <div th:if="${code} eq 'recognizelicenseplate'">
+                    <div class="col-md-6 column" th:if="${result} ne null" >
+                        <h4>车牌信息</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>车牌号码</th>
+                                <th>车牌类型</th>
+                            </tr>
+                            <tr th:each="plate:${result}">
+                                <td th:text="${plate.plateNumber}"></td>
+                                <td th:text="${plate.plateType}"></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div th:if="${code} eq 'recognizedrivinglicense'">
+                    <div class="col-md-6 column" th:if="${faceResult} ne null" >
+                        <h4>行驶证首页</h4>
+                        <p><span>号牌号码：</span><span th:text="${faceResult.plateNumber}"></span></p>
+                        <p><span>车辆类型：</span><span th:text="${faceResult.vehicleType}"></span></p>
+                        <p><span>所有人：</span><span th:text="${faceResult.owner}"></span></p>
+                        <p><span>住址：</span><span th:text="${faceResult.address}"></span></p>
+                        <p><span>使用性质：</span><span th:text="${faceResult.useCharacter}"></span></p>
+                        <p><span>品牌型号：</span><span th:text="${faceResult.model}"></span></p>
+                        <p><span>车辆识别代号：</span><span th:text="${faceResult.vin}"></span></p>
+                        <p><span>发动机号码：</span><span th:text="${faceResult.engineNumber}"></span></p>
+                        <p><span>注册日期：</span><span th:text="${faceResult.registerDate}"></span></p>
+                        <p><span>发证日期：</span><span th:text="${faceResult.issueDate}"></span></p>
+                    </div>
+                    <div class="col-md-6 column" th:if="${backResult} ne null" >
+                        <h4>行驶证副页</h4>
+                        <p><span>号牌号码：</span><span th:text="${backResult.plateNumber}"></span></p>
+                        <p><span>档案编号：</span><span th:text="${backResult.fileNumber}"></span></p>
+                        <p><span>核定载人数：</span><span th:text="${backResult.approvedPassengerCapacity}"></span></p>
+                        <p><span>总质量：</span><span th:text="${backResult.grossMass}"></span></p>
+                        <p><span>核定载质量：</span><span th:text="${backResult.approvedLoad}"></span></p>
+                        <p><span>整备质量：</span><span th:text="${backResult.unladenMass}"></span></p>
+                        <p><span>外廓尺寸：</span><span th:text="${backResult.overallDimension}"></span></p>
+                        <p><span>准牵引总质量：</span><span th:text="${backResult.tractionMass}"></span></p>
+                        <p><span>检验记录：</span><span th:text="${backResult.inspectionRecord}"></span></p>
+                        <p><span>能源标志：</span><span th:text="${backResult.energyType}"></span></p>
+                    </div>
+                </div>
+
+                <div th:if="${code} eq 'recognizeidentitycard'">
+                    <div class="col-md-6 column" th:if="${frontResult} ne null" >
+                        <h4>身份证人像面</h4>
+                        <p><span>姓名：</span><span th:text="${frontResult.name}"></span></p>
+                        <p><span>性别：</span><span th:text="${frontResult.gender}"></span></p>
+                        <p><span>民族：</span><span th:text="${frontResult.nationality}"></span></p>
+                        <p><span>出生年月：</span><span th:text="${frontResult.birthDate}"></span></p>
+                        <p><span>住址：</span><span th:text="${frontResult.address}"></span></p>
+                        <p><span>公民身份证号码：</span><span th:text="${frontResult.IDNumber}"></span></p>
+                    </div>
+                    <div class="col-md-6 column" th:if="${backResult} ne null" >
+                        <h4>身份证国徽面</h4>
+                        <p><span>签发机关：</span><span th:text="${backResult.issue}"></span></p>
+                        <p><span>有效期起始时间：</span><span th:text="${backResult.startDate}"></span></p>
+                        <p><span>有效期时长或有效期结束时间：</span><span th:text="${backResult.endDate}"></span></p>
+                    </div>
+                </div>
+
+                <div th:if="${code} eq 'recognizedriverlicense'">
+                    <div class="col-md-6 column" th:if="${faceResult} ne null" >
+                        <h4>驾驶证首页</h4>
+                        <p><span>驾驶证号：</span><span th:text="${faceResult.licenseNumber}"></span></p>
+                        <p><span>姓名：</span><span th:text="${faceResult.name}"></span></p>
+                        <p><span>性别：</span><span th:text="${faceResult.gender}"></span></p>
+                        <p><span>住址：</span><span th:text="${faceResult.address}"></span></p>
+                        <p><span>初次领证日期：</span><span th:text="${faceResult.issueDate}"></span></p>
+                        <p><span>准驾车型：</span><span th:text="${faceResult.vehicleType}"></span></p>
+                        <p><span>有效期开始时间：</span><span th:text="${faceResult.startDate}"></span></p>
+                        <p><span>有效期限或截止日期：</span><span th:text="${faceResult.endDate}"></span></p>
+                    </div>
+                    <div class="col-md-6 column" th:if="${backResult} ne null" >
+                        <h4>驾驶证副页</h4>
+                        <p><span>档案编号：</span><span th:text="${backResult.archiveNumber}"></span></p>
+                    </div>
+                </div>
+
+                <div th:if="${code} eq 'recognizeexpression'">
+                    <div class="col-md-6 column" th:if="${result} ne null" >
+                        <h4>表情信息</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>表情类别</th>
+                            </tr>
+                            <tr th:each="element:${result}">
+                                <td th:text="${element.expression}"></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div th:if="${code} eq 'recognizevehicledamage'">
+                    <div class="col-md-6 column" th:if="${result} ne null" >
+                        <h4>车辆损伤信息</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>损伤类型</th>
+                                <th>损伤次数</th>
+                            </tr>
+                            <tr th:each="element:${result}">
+                                <td th:text="${element.key}"></td>
+                                <td th:text="${element.value}"></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图像识别</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3>一、多种类型的图像识别</h3>
+            <ol>
+                <li><a href="/upload/recognizelicenseplate">车牌识别</a></li>
+                <li><a href="/upload/recognizeexpression">人脸表情识别</a></li>
+                <li><a href="/upload/recognizedrivinglicense">行驶证识别</a></li>
+            </ol>
+
+            <h3>二、车辆保险信息识别</h3>
+            <ol>
+                <li><a href="/upload/recognizeidentitycard">身份证识别</a></li>
+                <li><a href="/upload/recognizedriverlicense">驾驶证识别</a></li>
+                <li><a href="/upload/recognizevehicledamage">车辆损伤识别</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            var id = $(this).attr("id")
+
+            alert($(this).attr("id"));
+        });
+    });
+</script>
+
+</body>
+</html>
